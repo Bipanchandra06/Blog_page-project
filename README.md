@@ -16,7 +16,6 @@ A feature-rich blogging platform built with **Django** (backend) and **Bootstrap
 
 - **Post Interaction**  
   - Like/unlike posts  
-  - Comment on posts  
   - View post details  
 
 - **Filtering & Categories**  
@@ -32,8 +31,33 @@ A feature-rich blogging platform built with **Django** (backend) and **Bootstrap
 
 - **Backend**: Django (Python)  
 - **Frontend**: HTML, CSS, Bootstrap  
-- **Database**: SQLite (default) / PostgreSQL (production-ready)  
+- **Database**: SQLite (default) 
 - **Authentication**: Django’s built-in user auth system  
 
-## 📂 Project Structure  
+## ⚙️ Installation  
+# 1. Clone the repository
+git clone https://github.com/yourusername/blogsite.git
+cd blogsite
+
+# 2. Create a virtual environment & activate it
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Apply migrations
+python manage.py migrate
+
+# 5. Create a superuser (admin account)
+python manage.py createsuperuser
+
+# 6. Run the development server
+python manage.py runserver
+
+Now open http://127.0.0.1:8000/
+ in your browser
+
+REST API for mobile integration
 
