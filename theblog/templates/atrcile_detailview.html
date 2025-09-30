@@ -1,0 +1,67 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}{{post.title}}{%endblock%}
+
+{%block content%}
+<h1>{{post.title}}</h1>
+<small>written by:{{post.author   }}<br/>
+       published:{{ post.post_date}}
+       likes:{{totallikes}}
+<hr>
+{%if post.header_image%}
+<img src='{{post.header_image.url}}' width=500px><br></br><br></br>
+{%endif%}
+{{post.body|safe}}
+<br><br/>
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      {%if post.author.profile.profile_pic %}
+      <img src="{{post.author.profile.profile_pic.url}}" class=" card-img" alt="...">
+      {%else%}
+      <img src="{% static 'theblog/image/default_profile_pic.png'%}" class=" card-img" alt="...">
+      {%endif%}
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{post.author}}</h5>
+        <p class="card-text">{{post.author.profile.bio}}</p>
+        <p class="card-text"><small class="text-muted">
+            {%if post.author.profile%}
+            <a href='{% url 'user_profile' post.author.id %}' >Profile|</a>
+            {%endif%}
+             {%if post.author.profile.websitelink%}
+            <a href='{{post.author.profile.websitelink}}' >Website|</a>
+            {%endif%}
+            {%if post.author.profile.instagramlink%}
+            <a href="{{post.author.instagramlink}}">Instagram</a>
+            {%endif%}
+        </small></p>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br/>
+{%if user.is_authenticated%}
+{%if user.id == post.author.id%}
+<a href='{% url 'editpost' post.pk %}' type="button" class="btn btn-dark" >Edit<a>
+<br><br/>
+<a href='{% url 'deletepost' post.pk %}' type="button" class="btn btn-dark" >Delete<a><br/>
+<br><br/>
+{%endif%}
+
+<form action='{% url 'likepost' post.pk%}' method='POST'>
+    {%csrf_token%}
+    {%if lik %}
+    <button type='submit' name='post_id' value='{{post.id}}' class='btn btn-danger'>Unlike</button>
+       {%else %}
+       <button type='submit' name='post_id' value='{{post.id}}' class='btn btn-dark'>Like</button>
+       {%endif%}
+    
+</form>
+<br><br/>
+{%endif%}
+
+
+<a href='{% url 'home'%}' type="button" class="btn btn-dark" >Back<a>
+{%endblock%}

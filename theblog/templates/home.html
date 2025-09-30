@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block title%} my blog{%endblock%}
+{%block content%}
+
+<h1>Post</h1>
+<div class='container-fluid'>
+<ul>
+{% for post in object_list %}
+    <li><a href='{% url 'blog-article' post.pk %}'>{{post.title}}<a>  - {{post.post_date}} - <a href='{% url 'categorys' post.category|slugify %}'>{{post.category}}</a><br/>
+    {{post.snippet}}</li>
+
+{%endfor%}
+</ul>
+</div>
+{%endblock%}

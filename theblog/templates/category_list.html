@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+
+
+
+{%block content%}
+<h1>Categories</h1>
+{%for item in category_list %}
+<h4><a class='black' href='{%url 'categorys' item%}'> {{item}}</a></h4><br/>
+{%endfor%}
+{%endblock%}
