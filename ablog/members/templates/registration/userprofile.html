@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%} my blog{%endblock%}
+{%block content%}
+
+<h1>User Profile</h1>
+<br></br>
+<div class='container-fluid'>
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      {%if page_user.profile_pic %}
+      <img src="{{page_user.profile_pic.url}}" class=" card-img" alt="...">
+      {%else%}
+      <img src="{% static 'theblog/image/default_profile_pic.png'%}" class=" card-img" alt="...">
+      {%endif%}
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{page_user.bloguser}}</h5>
+        <p class="card-text">{{page_user.bio}}</p>
+        <p class="card-text"><small class="text-muted">
+            {%if page_user.instagramlink%}
+            <a href="{{page_user.instagramlink}}">Instagram</a>
+            {%endif%}
+        </small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1>Posts</h1>
+<div class='container-fluid'>
+<ul>
+{% for post in userposts %}
+    <li><a href='{% url 'blog-article' post.pk %}'>{{post.title}}<a>  - {{post.post_date}} - <a href='{% url 'categorys' post.category|slugify %}'>{{post.category}}</a><br/>
+    {{post.snippet}}</li>
+
+{%endfor%}
+</ul>
+</div>
+{%if user.id == page_user.bloguser.id%}
+ <a class ='btn btn-primary' role='button' href="{%url 'profile_edit' user.id %}">Edit Profile</a>
+{%endif%}
+</div>
+{%endblock%}

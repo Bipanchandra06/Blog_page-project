@@ -1,0 +1,243 @@
+/* --- Modern Blog Overrides --- */
+:root {
+  --primary-color: #2563eb;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --bg-light: #f9fafb;
+  --transition: all 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-light);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+}
+
+/* 1. Enhanced Container & Layout */
+.container {
+  max-width: 1140px;
+}
+
+/* 2. Modern Card Design (Overrides .card) */
+.card {
+  border: none;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 3. Refined Image Handling */
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.card:hover .card-img-top {
+  scale: 1.05;
+}
+
+/* 4. Typography Upgrades */
+.card-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+}
+
+.card-text {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* 5. Custom Button (Overrides .btn-primary) */
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* 6. Blog Specific: Meta Data (Date, Category) */
+.text-muted {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* --- Navbar Styling --- */
+.navbar {
+    background-color: #1f2937 !important; /* Matches your dark header */
+    padding: 1rem 0;
+}
+
+.navbar-brand, .nav-link {
+    color: #f9fafb !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #3b82f6 !important; /* Blue glow on hover */
+}
+
+/* --- Card Link Styles --- */
+.card-title a {
+    transition: color 0.2s ease;
+}
+
+.card-title a:hover {
+    color: #2563eb !important;
+}
+
+/* --- Remove default list styles if you keep the UL --- */
+ul.post-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* --- Badge for Categories --- */
+.category-badge {
+    background: #e5e7eb;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #374151;
+    font-weight: 600;
+}
+/* Ensure the card title hover effect looks modern */
+.card-title a {
+    transition: color 0.2s ease-in-out;
+}
+
+.card-title a:hover {
+    color: #2563eb !important; /* A nice vibrant blue */
+}
+
+/* Make badges look slightly more refined */
+.badge.bg-light {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    color: #4b5563 !important;
+}
+
+/* Prevent the navbar from cutting off the dropdown */
+.navbar, .container-fluid, .container {
+    overflow: visible !important;
+}
+
+/* Modernize the dropdown menu */
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+    margin-top: 10px !important; /* Spacing from the toggle */
+    z-index: 1050; /* Ensures it stays above blog posts */
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f3f4f6;
+    color: #2563eb;
+    transform: translateX(5px);
+}
+
+/* Fix Clipping: Allow dropdowns to pop out of the navbar */
+.navbar {
+    overflow: visible !important;
+}
+
+/* Modernize the menu appearance */
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 200px;
+}
+
+/* Style the Logout button specifically */
+.dropdown-menu .btn-danger {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 5px 15px;
+}
+
+/* Fix item hover style */
+.dropdown-item {
+    border-radius: 6px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #2563eb;
+}
+
+/* 1. Force the navbar to allow elements to pop out */
+.navbar {
+    overflow: visible !important;
+}
+
+/* 2. Remove overflow restrictions on the container holding the navbar */
+.container, .container-fluid {
+    overflow: visible !important;
+}
+
+/* 3. Modernize the menu look and ensure it's on top */
+.dropdown-menu {
+    top: 100%; /* Positions it correctly below the link */
+    margin-top: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999 !important; /* Forces it above other content */
+}
+
+/* 4. Fix for the Logout button appearance */
+.nav-button, .btn-block {
+    cursor: pointer;
+    width: 100%;
+}
+/* Force the dropdown to float over content */
+.dropdown-menu {
+    position: absolute !important;
+    top: 100% !important; /* Positions it exactly below the name */
+    left: auto !important;
+    right: 0 !important;   /* Aligns it to the right edge of the username */
+    float: none !important;
+    display: none;        /* Hidden by default */
+}
+
+/* Show the menu when the 'show' class is added by Bootstrap JS */
+.dropdown-menu.show {
+    display: block !important;
+    z-index: 10000 !important; /* Ensure it stays above the blog cards */
+}
+
+/* Ensure the navbar doesn't restrict the dropdown height */
+.navbar, .navbar-nav, .nav-item {
+    position: relative !important;
+    overflow: visible !important;
+}

@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+
+
+{%block content%}
+{%if user.is_authenticated %}
+{%if user.id == post.author.id%}
+<h1>Delete your post</h1>
+<div class='container'>
+<div class='form-group'>
+<form method='POST'>
+    {% csrf_token %}
+    <strong>Are you sure</strong><br/>
+    <br><br/>
+
+    <button  class="btn btn-success">Delete post</button>
+    <a href='{% url 'blog-article' post.pk %}' type="button" class="btn btn-dark" >Back<a>
+</div>
+</div>
+{%endif%}
+{%else%}
+<a class="btn btn-dark">login</a>
+{%endif%}
+{%endblock%}

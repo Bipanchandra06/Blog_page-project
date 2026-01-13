@@ -1,0 +1,133 @@
+{%extends 'base.html'%} {% load static%} {%block title%}{{ post.title
+}}{%endblock%} {% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="article-header text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">{{ post.title }}</h1>
+        <div class="article-meta text-muted mb-4">
+          <span>By <strong class="text-dark">{{ post.author }}</strong></span>
+          <span class="mx-2">•</span>
+          <span>{{ post.post_date }}</span>
+          <span class="mx-2">•</span>
+          <span
+            ><i class="fas fa-heart text-danger"></i> {{ totallikes }}
+            Likes</span
+          >
+        </div>
+
+        {%if post.header_image%}
+        <img
+          src="{{ post.header_image.url }}"
+          class="img-fluid rounded-4 shadow-sm mb-4"
+          style="width: 100%; max-height: 450px; object-fit: cover"
+        />
+        {%endif%}
+      </div>
+
+      <div class="article-content lh-lg fs-5 mb-5">{{ post.body|safe }}</div>
+
+      <hr class="my-5" />
+
+      {%if user.is_authenticated%}
+      <div class="d-flex align-items-center mb-5">
+        <form action="{% url 'likepost' post.pk %}" method="POST" class="me-3">
+          {%csrf_token%} {%if lik%}
+          <button
+            type="submit"
+            name="post_id"
+            value="{{ post.id }}"
+            class="btn btn-danger px-4 rounded-pill shadow-sm"
+          >
+            <i class="fas fa-heart-broken"></i> Unlike
+          </button>
+          {%else%}
+          <button
+            type="submit"
+            name="post_id"
+            value="{{ post.id }}"
+            class="btn btn-dark px-4 rounded-pill shadow-sm"
+          >
+            <i class="fas fa-heart"></i> Like
+          </button>
+          {%endif%}
+        </form>
+
+        {%if user.id == post.author.id%}
+        <a
+          href="{% url 'editpost' post.pk %}"
+          class="btn btn-outline-secondary btn-sm me-2 rounded-pill"
+          >Edit</a
+        >
+        <a
+          href="{% url 'deletepost' post.pk %}"
+          class="btn btn-outline-danger btn-sm rounded-pill"
+          >Delete</a
+        >
+        {%endif%}
+      </div>
+      {%endif%}
+
+      <div class="card border-0 shadow-sm rounded-4 bg-light p-3">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-3 text-center p-3">
+            {%if post.author.profile.profile_pic%}
+            <img
+              src="{{ post.author.profile.profile_pic.url }}"
+              class="rounded-circle shadow-sm"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+            {%else%}
+            <img
+              src="{% static 'theblog/image/default_profile_pic.png' %}"
+              class="rounded-circle shadow-sm"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+            {%endif%}
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h5 class="card-title fw-bold mb-1">{{ post.author }}</h5>
+              <p class="card-text text-muted mb-3">
+                {{ post.author.profile.bio }}
+              </p>
+
+              <div class="author-links">
+                {%if post.author.profile%}
+                <a
+                  href="{% url 'user_profile' post.author.id %}"
+                  class="btn btn-sm btn-white border rounded-pill me-2"
+                  >View Profile</a
+                >
+                {%endif%} {%if post.author.profile.websitelink%}
+                <a
+                  href="{{ post.author.profile.websitelink }}"
+                  target="_blank"
+                  class="btn btn-sm btn-white border rounded-pill me-2"
+                  >Website</a
+                >
+                {%endif%} {%if post.author.profile.instagramlink%}
+                <a
+                  href="{{ post.author.profile.instagramlink }}"
+                  target="_blank"
+                  class="btn btn-sm btn-white border rounded-pill text-danger"
+                  >Instagram</a
+                >
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 text-center">
+        <a
+          href="{% url 'home' %}"
+          class="btn btn-link text-decoration-none text-muted"
+          >← Back to Feed</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
